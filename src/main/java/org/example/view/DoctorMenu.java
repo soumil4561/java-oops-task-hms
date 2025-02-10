@@ -4,33 +4,18 @@ import org.example.models.Patient.PatientList;
 import org.example.models.Staff.Doctor;
 import org.example.models.Staff.DoctorList;
 import org.example.models.Patient.Patient;
+import org.example.utils.ValidateUserInput;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class DoctorMenu {
     public static void showMenu() {
         Scanner scanner = new Scanner(System.in);
-        DoctorList doctorList = DoctorList.getInstance();
-        List<Doctor> doctors = doctorList.getDoctors();
 
-        if (doctors.isEmpty()) {
-            System.out.println("No doctors available.");
-            return;
-        }
+        System.out.println("Enter Doctor's ID: ");
 
-        System.out.println("Select a doctor:");
-        for (int i = 0; i < doctors.size(); i++) {
-            System.out.println((i + 1) + ". " + doctors.get(i).getName());
-        }
-
-        int choice = scanner.nextInt();
-        if (choice < 1 || choice > doctors.size()) {
-            System.out.println("Invalid choice.");
-            return;
-        }
-
-        Doctor doctor = doctors.get(choice - 1);
+        String id = scanner.nextLine();
+        Doctor doctor = DoctorList.getInstance().findByID(id);
         boolean run = true;
         while (run) {
             System.out.println("\nDoctor Menu: " + doctor.getName());
@@ -38,7 +23,7 @@ public class DoctorMenu {
             System.out.println("2. Admit a Patient");
             System.out.println("3. Discharge a Patient");
             System.out.println("4. Exit");
-            int action = scanner.nextInt();
+            int action = ValidateUserInput.getValidInteger(scanner, "Your Choice: ");
 
             switch (action) {
                 case 1:

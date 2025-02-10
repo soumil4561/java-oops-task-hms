@@ -18,7 +18,7 @@ public class PatientList {
 
     public static PatientList getInstance() {
         if (instance == null) {
-            instance = new PatientList(); // Initialize instance here
+            instance = new PatientList();
         }
         return instance;
     }

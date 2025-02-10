@@ -1,6 +1,9 @@
 package org.example.view;
 
 import org.example.models.Hospital.Hospital;
+import org.example.models.Staff.DoctorList;
+import org.example.models.Staff.ReceptionistList;
+import org.example.utils.ValidateUserInput;
 
 import java.util.Scanner;
 
@@ -16,9 +19,9 @@ public class MainMenu {
         boolean run = true;
 
         while (run) {
-            System.out.println("Welcome to " + hospital.getName() + "\nAddress: " + hospital.getAddress());
-            System.out.println("Who are you? (Enter number):\n1. Receptionist\n2. Doctor\n3. Admin\n4. Quit");
-            int choice = scanner.nextInt();
+            System.out.println("\n\nWelcome to " + hospital.getName() + "\nAddress: " + hospital.getAddress());
+            System.out.println("\nSelect option:\n1. Receptionist Menu\n2. Doctor Menu\n3. Admin Dashboard\n4. Show Staff List\n5. Quit");
+            int choice = ValidateUserInput.getValidInteger(scanner, "Your Choice: ");
             switch (choice) {
                 case 1:
                     ReceptionistMenu.showMenu();
@@ -30,6 +33,10 @@ public class MainMenu {
                     AdminMenu.showMenu(hospital);
                     break;
                 case 4:
+                    ReceptionistList.getInstance().viewStaffList();
+                    DoctorList.getInstance().viewStaffList();
+                    break;
+                case 5:
                     System.out.println("Quitting....");
                     run = false;
                     break;

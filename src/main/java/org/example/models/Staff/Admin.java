@@ -2,6 +2,7 @@ package org.example.models.Staff;
 
 import org.example.interfaces.AdminActions;
 import org.example.models.Hospital.Hospital;
+import org.example.utils.ValidateUserInput;
 
 public class Admin extends Staff implements AdminActions {
     private static Admin instance;
@@ -20,13 +21,26 @@ public class Admin extends Staff implements AdminActions {
     }
 
     public void setHospitalName(String name) {
-        hospital.setName(name);
-        System.out.println("Hospital name updated to: " + name);
+        ValidateUserInput.validateStringInput(name);
+        try{
+            hospital.setName(name);
+            System.out.println("Hospital name updated to: " + name);
+        }
+        catch (Exception e){
+            System.out.println("Error changing hospital address.");
+        }
     }
 
     public void setHospitalAddress(String address) {
-        hospital.setAddress(address);
-        System.out.println("Hospital address updated to: " + address);
+        ValidateUserInput.validateStringInput(address);
+        try{
+            hospital.setAddress(address);
+            System.out.println("Hospital address updated to: " + address);
+        }
+        catch (Exception e){
+            System.out.println("Error changing hospital address.");
+        }
+
     }
 
     public void addDoctor(String name, String speciality) {

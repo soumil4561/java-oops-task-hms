@@ -5,6 +5,7 @@ import org.example.models.Staff.ReceptionistList;
 import org.example.models.Patient.Patient;
 import org.example.models.Staff.Doctor;
 import org.example.models.Staff.DoctorList;
+import org.example.utils.ValidateUserInput;
 
 import java.util.List;
 import java.util.Scanner;
@@ -28,7 +29,7 @@ public class ReceptionistMenu {
             System.out.println("\nReceptionist Menu: " + receptionist.getName());
             System.out.println("1. Register and Assign a Patient to a Doctor");
             System.out.println("2. Exit");
-            int action = scanner.nextInt();
+            int action = ValidateUserInput.getValidInteger(scanner, "Your Choice: ");
 
             switch (action) {
                 case 1:
@@ -38,8 +39,7 @@ public class ReceptionistMenu {
                     String patientName = scanner.nextLine();
                     if(patientName.equals("q")) break;
 
-                    System.out.println("Enter patient age:");
-                    int patientAge = scanner.nextInt();
+                    int patientAge = ValidateUserInput.getValidInteger(scanner, "Enter patient age: ");
 
                     DoctorList doctorList = DoctorList.getInstance();
                     List<Doctor> doctors = doctorList.getDoctors();
