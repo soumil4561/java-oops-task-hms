@@ -29,4 +29,8 @@ public class ConfigLoader {
     public static String getDefaultHospitalAddress(){
         return properties.getProperty("hospital.address");
     }
+
+    public static boolean loadSampleData(){
+        return properties.getProperty("load.sample.data").equals("true");
+    }
 }

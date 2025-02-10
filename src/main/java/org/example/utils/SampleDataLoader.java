@@ -62,8 +62,8 @@ public class SampleDataLoader {
                         patient.setStatus("OPD");
                         assignedDoctor.addPatienttoList(patient);
                         PatientList.getInstance().addOPDPatient(patient);
-                        if(status.equals("IPD")) patient.markAsInPatient();
-                        if(status.equals("Discharged")) patient.dischargePatient();
+                        if(status.equals("IPD")) assignedDoctor.admitPatient(patient);
+                        if(status.equals("Discharged")) assignedDoctor.dischargePatients(patient);
                     } else {
                         System.err.println("Doctor " + doctorName + " not found for patient " + name);
                     }
