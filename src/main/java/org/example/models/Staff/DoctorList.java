@@ -22,6 +22,14 @@ public class DoctorList {
         doctors.add(doctor);
     }
 
+    public Doctor findByName(String name) {
+        return doctors.stream()
+                .filter(doctor -> doctor.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
+
     public List<Doctor> getDoctors() {
         return doctors;
     }
