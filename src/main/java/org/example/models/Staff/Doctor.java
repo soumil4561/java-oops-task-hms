@@ -18,6 +18,10 @@ public class Doctor extends Staff implements DoctorActions {
         this.speciality = speciality;
     }
 
+    public String getSpeciality() {
+        return speciality;
+    }
+
     public void addPatienttoList(Patient patient){
         assignedPatients.add(patient);
     }
@@ -30,7 +34,11 @@ public class Doctor extends Staff implements DoctorActions {
     @Override
     public void admitPatient(Patient patient) {
         if(assignedPatients.contains(patient)){
-            patient.markAsInPatient();
+            //if patient is already admitted
+            if(patient.getStatus().equals("IPD")){
+                System.out.println("Patient "+patient.getName()+" is already admitted");
+            }
+            else patient.markAsInPatient();
         }
         else{
             System.out.println("Doctor " + getName() + " is not assigned to this patient.");

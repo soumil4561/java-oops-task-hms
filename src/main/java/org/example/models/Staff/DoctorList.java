@@ -33,4 +33,18 @@ public class DoctorList {
     public List<Doctor> getDoctors() {
         return doctors;
     }
+
+    public Doctor findByID(String id) {
+        return doctors.stream()
+                .filter(doctor -> doctor.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void viewStaffList(){
+        System.out.println("\n--------Listing Doctors---------- ");
+        for (Doctor doctor: doctors){
+            System.out.println(doctor.getId()+": "+doctor.getName()+" : "+doctor.getSpeciality());
+        }
+    }
 }

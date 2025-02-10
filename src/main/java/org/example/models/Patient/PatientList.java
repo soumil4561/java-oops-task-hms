@@ -62,6 +62,17 @@ public class PatientList {
         return DischargedList;
     }
 
+    public Patient findById(String patientID){
+        System.out.println("Searching ID: "+patientID);
+
+        Patient patient= findByIDinOPDList(patientID);
+        if(patient!=null) return patient;
+
+        patient = findByIDinIPDList(patientID);
+        if(patient!=null) return patient;
+
+        return findByIDinDischargedList(patientID);
+    }
 
     public Patient findByIDinOPDList(String patientID) {
         System.out.println("Searching ID: "+patientID);
@@ -74,6 +85,12 @@ public class PatientList {
         System.out.println("Searching ID: "+patientID);
         return IPDPatientList.stream()
                 .filter(patient -> patient.getId().equals(patientID))
+                .findFirst().orElse(null);
+    }
+
+    public Patient findByIDinDischargedList(String patientID){
+        return DischargedList.stream()
+                .filter(p->p.getId().equals(patientID))
                 .findFirst().orElse(null);
     }
 }

@@ -25,4 +25,17 @@ public class ReceptionistList {
     public List<Receptionist> getReceptionists() {
         return receptionists;
     }
+
+    public Receptionist findById(String id) {
+        return receptionists.stream()
+                .filter(receptionist -> receptionist.getId().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    public void viewStaffList(){
+        System.out.println("\n--------Listing Receptionists---------- ");
+        for (Receptionist receptionist: receptionists){
+            System.out.println(receptionist.getId()+": "+receptionist.getName());
+        }
+    }
 }

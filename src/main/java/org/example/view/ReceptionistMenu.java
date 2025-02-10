@@ -12,26 +12,17 @@ import java.util.Scanner;
 public class ReceptionistMenu {
     public static void showMenu() {
         Scanner scanner = new Scanner(System.in);
-        ReceptionistList receptionistList = ReceptionistList.getInstance();
-        List<Receptionist> receptionists = receptionistList.getReceptionists();
 
-        if (receptionists.isEmpty()) {
-            System.out.println("No receptionists available.");
+        System.out.println("Enter Receptionist ID: ");
+
+        String id = scanner.next();
+
+        Receptionist receptionist = ReceptionistList.getInstance().findById(id);
+        if(receptionist==null){
+            System.out.println("Receptionist not found");
             return;
         }
 
-        System.out.println("Select a receptionist:");
-        for (int i = 0; i < receptionists.size(); i++) {
-            System.out.println((i + 1) + ". " + receptionists.get(i).getName());
-        }
-
-        int choice = scanner.nextInt();
-        if (choice < 1 || choice > receptionists.size()) {
-            System.out.println("Invalid choice.");
-            return;
-        }
-
-        Receptionist receptionist = receptionists.get(choice - 1);
         boolean run = true;
         while (run) {
             System.out.println("\nReceptionist Menu: " + receptionist.getName());
@@ -41,13 +32,14 @@ public class ReceptionistMenu {
 
             switch (action) {
                 case 1:
-                    System.out.println("Enter patient name to register:");
-                    scanner.nextLine(); // Consume leftover newline
+                    System.out.println("Enter patient name to register (Enter q to go back):");
+                    scanner.nextLine();
+
                     String patientName = scanner.nextLine();
+                    if(patientName.equals("q")) break;
 
                     System.out.println("Enter patient age:");
                     int patientAge = scanner.nextInt();
-
 
                     DoctorList doctorList = DoctorList.getInstance();
                     List<Doctor> doctors = doctorList.getDoctors();
@@ -55,19 +47,17 @@ public class ReceptionistMenu {
                         System.out.println("No doctors available to assign.");
                         break;
                     }
-
-                    System.out.println("Select a doctor:");
-                    for (int i = 0; i < doctors.size(); i++) {
-                        System.out.println((i + 1) + ". " + doctors.get(i).getName());
+                    System.out.println("Select a doctor (Enter ID):");
+                    for (Doctor doctor: doctors) {
+                        System.out.println(doctor.getId()+ " : " + doctor.getName()+" : "+doctor.getSpeciality());
                     }
 
-                    int doctorChoice = scanner.nextInt();
-                    if (doctorChoice < 1 || doctorChoice > doctors.size()) {
-                        System.out.println("Invalid doctor choice.");
+                    id = scanner.next();
+                    Doctor selectedDoctor = DoctorList.getInstance().findByID(id);
+                    if(selectedDoctor==null){
+                        System.out.println("No doctor with given ID found.");
                         break;
                     }
-
-                    Doctor selectedDoctor = doctors.get(doctorChoice - 1);
                     Patient newPatient = new Patient(patientName, patientAge);
                     receptionist.registerPatient(newPatient);
                     receptionist.assignPatientToDoctor(newPatient, selectedDoctor);

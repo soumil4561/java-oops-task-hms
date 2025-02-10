@@ -23,7 +23,7 @@ public abstract class Staff {
         return id;
     }
 
-    public abstract void performDuties(); // Abstract method (to be implemented by subclasses)
+    public abstract void performDuties();
 
     @Override
     public String toString() {

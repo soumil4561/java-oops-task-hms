@@ -48,7 +48,7 @@ public class DoctorMenu {
                     System.out.println("Enter patient ID to admit (Enter q to go back): ");
                     String IPDPatientID = scanner.next();
                     if(IPDPatientID.equals("q")) break;
-                    Patient patient = PatientList.getInstance().findByIDinOPDList(IPDPatientID);
+                    Patient patient = PatientList.getInstance().findById(IPDPatientID);
                     if(patient!=null) doctor.admitPatient(patient);
                     else System.out.println("No Patient Found");
                     break;
@@ -56,7 +56,7 @@ public class DoctorMenu {
                     System.out.println("Enter patient ID to discharge (Enter q to go back):");
                     String dischargePatientID = scanner.next();
                     if(dischargePatientID.equals("q")) break;
-                    Patient patient1 = PatientList.getInstance().findByIDinIPDList(dischargePatientID);
+                    Patient patient1 = PatientList.getInstance().findById(dischargePatientID);
                     if(patient1!=null) doctor.dischargePatients(patient1);
                     else System.out.println("No Patient found");
                     break;
