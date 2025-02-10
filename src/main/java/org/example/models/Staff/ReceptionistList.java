@@ -1,5 +1,7 @@
 package org.example.models.Staff;
 
+import org.example.utils.ValidateUserInput;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,23 +21,43 @@ public class ReceptionistList {
     }
 
     public void addReceptionist(Receptionist receptionist) {
-        receptionists.add(receptionist);
-    }
+        try {
+            if (receptionist == null) {
+                throw new IllegalArgumentException("Receptionist cannot be null.");
+            }
 
-    public List<Receptionist> getReceptionists() {
-        return receptionists;
+            if (findById(receptionist.getId()) != null) {
+                System.out.println("Receptionist with ID " + receptionist.getId() + " already exists.");
+                return;
+            }
+
+            receptionists.add(receptionist);
+            System.out.println("Receptionist " + receptionist.getName() + " added successfully.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Unexpected error while adding receptionist: " + e.getMessage());
+        }
     }
 
     public Receptionist findById(String id) {
+        ValidateUserInput.validateStringInput(id);
+
         return receptionists.stream()
                 .filter(receptionist -> receptionist.getId().equals(id))
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
     }
 
-    public void viewStaffList(){
+    public void viewStaffList() {
+        if (receptionists.isEmpty()) {
+            System.out.println("No receptionists available.");
+            return;
+        }
+
         System.out.println("\n--------Listing Receptionists---------- ");
-        for (Receptionist receptionist: receptionists){
-            System.out.println(receptionist.getId()+": "+receptionist.getName());
+        for (Receptionist receptionist : receptionists) {
+            System.out.println(receptionist.getId() + ": " + receptionist.getName());
         }
     }
 }

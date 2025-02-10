@@ -2,6 +2,7 @@ package org.example.models.Hospital;
 
 import org.example.models.Patient.PatientList;
 import org.example.utils.SampleDataLoader;
+import org.example.utils.ValidateUserInput;
 import org.example.view.MainMenu;
 
 import org.example.utils.ConfigLoader;
@@ -30,6 +31,7 @@ public class Hospital {
     }
 
     public void setName(String name) {
+        ValidateUserInput.validateStringInput(name);
         this.name = name;
     }
 

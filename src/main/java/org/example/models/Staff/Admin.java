@@ -21,42 +21,66 @@ public class Admin extends Staff implements AdminActions {
     }
 
     public void setHospitalName(String name) {
-        ValidateUserInput.validateStringInput(name);
-        try{
+        try {
+            ValidateUserInput.validateStringInput(name);
             hospital.setName(name);
             System.out.println("Hospital name updated to: " + name);
-        }
-        catch (Exception e){
-            System.out.println("Error changing hospital address.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid hospital name: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error changing hospital name: " + e.getMessage());
         }
     }
 
     public void setHospitalAddress(String address) {
-        ValidateUserInput.validateStringInput(address);
-        try{
+        try {
+            ValidateUserInput.validateStringInput(address);
             hospital.setAddress(address);
             System.out.println("Hospital address updated to: " + address);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid hospital address: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error changing hospital address: " + e.getMessage());
         }
-        catch (Exception e){
-            System.out.println("Error changing hospital address.");
-        }
-
     }
 
     public void addDoctor(String name, String speciality) {
-        Doctor doctor = new Doctor( name, speciality);
-        DoctorList.getInstance().addDoctor(doctor);
-        System.out.println("Doctor " + name + " added successfully.");
+        try {
+            ValidateUserInput.validateStringInput(name);
+            ValidateUserInput.validateStringInput(speciality);
+
+            DoctorList doctorList = DoctorList.getInstance();
+
+            Doctor doctor = new Doctor(name, speciality);
+            doctorList.addDoctor(doctor);
+            System.out.println("Doctor " + name + " added successfully.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid input: " + e.getMessage());
+        } catch (IllegalStateException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Unexpected error while adding doctor: " + e.getMessage());
+        }
     }
 
     public void addReceptionist(String name) {
-        Receptionist receptionist = new Receptionist(name);
-        ReceptionistList.getInstance().addReceptionist(receptionist);
-        System.out.println("Receptionist " + name + " added successfully.");
+        try {
+            ValidateUserInput.validateStringInput(name);
+            ReceptionistList receptionistList = ReceptionistList.getInstance();
+            Receptionist receptionist = new Receptionist(name);
+            receptionistList.addReceptionist(receptionist);
+            System.out.println("Receptionist " + name + " added successfully.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Invalid input: " + e.getMessage());
+        } catch (IllegalStateException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Unexpected error while adding receptionist: " + e.getMessage());
+        }
     }
 
     @Override
     public void performDuties() {
-        System.out.println("Admin is managing hospital details");
+        System.out.println("Admin is managing hospital details.");
     }
 }

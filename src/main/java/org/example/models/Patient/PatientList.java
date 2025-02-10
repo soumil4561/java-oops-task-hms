@@ -1,5 +1,7 @@
 package org.example.models.Patient;
 
+import org.example.utils.ValidateUserInput;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +26,19 @@ public class PatientList {
     }
 
     public void addOPDPatient(Patient patient){
+        if(patient==null){
+            System.err.println("Error: Patient cant be null");
+            return;
+        }
         OPDPatientList.add(patient);
         System.out.println("Added patient "+patient.getName()+ " to OPD List");
     }
 
     public void upgradeToIPD(Patient patient){
+        if(patient==null){
+            System.err.println("Error: Patient cant be null");
+            return;
+        }
         if(OPDPatientList.contains(patient)){
             OPDPatientList.remove(patient);
             System.out.println("Removed patient from OPD List");
@@ -39,6 +49,10 @@ public class PatientList {
     }
 
     public void dischargePatient(Patient patient){
+        if(patient==null){
+            System.err.println("Error: Patient cant be null");
+            return;
+        }
         if(patient.getStatus().equals("OPD")){
             OPDPatientList.remove(patient);
         }
@@ -64,17 +78,22 @@ public class PatientList {
 
     public Patient findById(String patientID){
         System.out.println("Searching ID: "+patientID);
+        try{
+            Patient patient= findByIDinOPDList(patientID);
+            if(patient!=null) return patient;
 
-        Patient patient= findByIDinOPDList(patientID);
-        if(patient!=null) return patient;
+            patient = findByIDinIPDList(patientID);
+            if(patient!=null) return patient;
 
-        patient = findByIDinIPDList(patientID);
-        if(patient!=null) return patient;
-
-        return findByIDinDischargedList(patientID);
+            return findByIDinDischargedList(patientID);
+        } catch (Exception e) {
+            System.out.println("Unexpected error occured: "+e.getMessage());
+            return null;
+        }
     }
 
     public Patient findByIDinOPDList(String patientID) {
+        ValidateUserInput.validateStringInput(patientID);
         System.out.println("Searching ID: "+patientID);
         return OPDPatientList.stream()
                 .filter(patient -> patient.getId().equals(patientID))
@@ -82,6 +101,7 @@ public class PatientList {
     }
 
     public Patient findByIDinIPDList(String patientID) {
+        ValidateUserInput.validateStringInput(patientID);
         System.out.println("Searching ID: "+patientID);
         return IPDPatientList.stream()
                 .filter(patient -> patient.getId().equals(patientID))
@@ -89,6 +109,7 @@ public class PatientList {
     }
 
     public Patient findByIDinDischargedList(String patientID){
+        ValidateUserInput.validateStringInput(patientID);
         return DischargedList.stream()
                 .filter(p->p.getId().equals(patientID))
                 .findFirst().orElse(null);

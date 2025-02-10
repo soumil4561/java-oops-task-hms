@@ -12,7 +12,7 @@ public class Doctor extends Staff implements DoctorActions {
     private final String speciality;
 
     public Doctor(String name, String speciality) {
-        super("D"+doctorCounter, name, "Doctor");
+        super("D" + doctorCounter, name, "Doctor");
         doctorCounter++;
         assignedPatients = new ArrayList<>();
         this.speciality = speciality;
@@ -22,8 +22,27 @@ public class Doctor extends Staff implements DoctorActions {
         return speciality;
     }
 
-    public void addPatienttoList(Patient patient){
-        assignedPatients.add(patient);
+    public List<Patient> getAssignedPatients() {
+        return assignedPatients;
+    }
+
+    public void addPatientToList(Patient patient) {
+        try {
+            if (patient == null) {
+                throw new IllegalArgumentException("Patient cannot be null.");
+            }
+
+            if (assignedPatients.contains(patient)) {
+                throw new IllegalStateException("Patient " + patient.getName() + " is already assigned to this doctor.");
+            }
+
+            assignedPatients.add(patient);
+            System.out.println("Patient " + patient.getName() + " assigned to Dr. " + getName());
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Unexpected error while adding patient: " + e.getMessage());
+        }
     }
 
     @Override
@@ -33,26 +52,48 @@ public class Doctor extends Staff implements DoctorActions {
 
     @Override
     public void admitPatient(Patient patient) {
-        if(assignedPatients.contains(patient)){
-            //if patient is already admitted
-            if(patient.getStatus().equals("IPD")){
-                System.out.println("Patient "+patient.getName()+" is already admitted");
+        try {
+            if (patient == null) {
+                throw new IllegalArgumentException("Patient cannot be null.");
             }
-            else patient.markAsInPatient();
-        }
-        else{
-            System.out.println("Doctor " + getName() + " is not assigned to this patient.");
+
+            if (!assignedPatients.contains(patient)) {
+                throw new IllegalStateException("Doctor " + getName() + " is not assigned to this patient.");
+            }
+
+            if ("IPD".equals(patient.getStatus())) {
+                throw new IllegalStateException("Patient " + patient.getName() + " is already admitted.");
+            }
+
+            patient.markAsInPatient();
+            System.out.println("Patient " + patient.getName() + " has been admitted.");
+
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Unexpected error while admitting patient: " + e.getMessage());
         }
     }
 
     @Override
     public void dischargePatients(Patient patient) {
-        if(assignedPatients.contains(patient)){
+        try {
+            if (patient == null) {
+                throw new IllegalArgumentException("Patient cannot be null.");
+            }
+
+            if (!assignedPatients.contains(patient)) {
+                throw new IllegalStateException("Doctor " + getName() + " is not assigned to this patient.");
+            }
+
             assignedPatients.remove(patient);
             patient.dischargePatient();
-        }
-        else{
-            System.out.println("Doctor " + getName() + " is not assigned to this patient.");
+            System.out.println("Patient " + patient.getName() + " has been discharged.");
+
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            System.err.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Unexpected error while discharging patient: " + e.getMessage());
         }
     }
 
@@ -63,8 +104,12 @@ public class Doctor extends Staff implements DoctorActions {
         System.out.println("| ID | Name       | Status |");
         System.out.println("+----+------------+--------+");
 
-        for (Patient p : assignedPatients) {
-            System.out.printf("| %-10s | %-10s | %-6s |\n", p.getId(), p.getName(), p.getStatus());
+        if (assignedPatients.isEmpty()) {
+            System.out.println("| No assigned patients       |");
+        } else {
+            for (Patient p : assignedPatients) {
+                System.out.printf("| %-10s | %-10s | %-6s |\n", p.getId(), p.getName(), p.getStatus());
+            }
         }
 
         System.out.println("+----+------------+--------+");

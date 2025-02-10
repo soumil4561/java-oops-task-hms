@@ -27,6 +27,6 @@ public abstract class Staff {
 
     @Override
     public String toString() {
-        return String.format("| %-3d | %-15s | %-12s |", id, name, role);
+        return String.format("| %-3s | %-15s | %-12s |", id, name, role);
     }
 }

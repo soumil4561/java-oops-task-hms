@@ -1,6 +1,7 @@
 package org.example.models.Patient;
 
 import org.example.models.Staff.Doctor;
+import org.example.utils.ValidateUserInput;
 
 public class Patient {
     private final String id;
@@ -11,33 +12,54 @@ public class Patient {
     private static int patientCounter = 1;
 
     public Patient(String name, int age) {
-        this.id = "P"+patientCounter;
+        ValidateUserInput.validateStringInput(name);
+        //age check
+        if (age <= 0 || age > 120) {
+            throw new IllegalArgumentException("Error: Invalid age provided.");
+        }
+
+        this.id = "P" + patientCounter;
         this.name = name;
         this.age = age;
+
         patientCounter++;
     }
 
-    public void addPatient(){
-        PatientList patientList = PatientList.getInstance();
-        patientList.addOPDPatient(this);
+    public void addPatient() {
+        try {
+            PatientList patientList = PatientList.getInstance();
+            patientList.addOPDPatient(this);
+        } catch (Exception e) {
+            System.out.println("Error: Unable to add patient. " + e.getMessage());
+        }
     }
 
-    public void markAsInPatient(){
-        if(this.getStatus().equals("OPD")){
+    public void markAsInPatient() {
+        if (this.getStatus().equals("OPD")) {
             this.setStatus("IPD");
-            PatientList patientList = PatientList.getInstance();
-            patientList.upgradeToIPD(this);
-            System.out.println("Patient "+this.getName()+" admitted");
+            try {
+                PatientList patientList = PatientList.getInstance();
+                patientList.upgradeToIPD(this);
+                System.out.println("Patient " + this.getName() + " admitted.");
+            } catch (Exception e) {
+                System.out.println("Error: Unable to mark patient as in-patient. " + e.getMessage());
+            }
+        } else {
+            System.out.println("Invalid Operation: Patient is not in OPD.");
         }
-        else System.out.println("Invalid Operation");
     }
 
-    public void dischargePatient(){
-        if(this.getStatus().equals("OPD") || this.getStatus().equals("IPD")){
-            PatientList patientList = PatientList.getInstance();
-            patientList.dischargePatient(this);
+    public void dischargePatient() {
+        if (this.getStatus().equals("OPD") || this.getStatus().equals("IPD")) {
+            try {
+                PatientList patientList = PatientList.getInstance();
+                patientList.dischargePatient(this);
+            } catch (Exception e) {
+                System.out.println("Error: Unable to discharge patient. " + e.getMessage());
+            }
+        } else {
+            System.out.println("Error: Patient not found in any active list.");
         }
-        else System.out.println("Patient not found in any active list.");
     }
 
     public String getStatus() {
@@ -45,6 +67,10 @@ public class Patient {
     }
 
     public void setStatus(String status) {
+        if (status == null || (!status.equals("OPD") && !status.equals("IPD") && !status.equals("Discharged"))) {
+            System.out.println("Error: Invalid patient status update.");
+            return;
+        }
         this.status = status;
     }
 
@@ -57,6 +83,10 @@ public class Patient {
     }
 
     public void setDoctor(Doctor doctor) {
+        if (doctor == null) {
+            System.out.println("Error: Cannot assign a null doctor.");
+            return;
+        }
         this.doctor = doctor;
     }
 
@@ -66,7 +96,7 @@ public class Patient {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", doctor=" + doctor +
+                ", doctor=" + (doctor != null ? doctor.getName() : "None") +
                 ", status='" + status + '\'' +
                 '}';
     }
