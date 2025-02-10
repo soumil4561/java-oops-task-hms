@@ -63,4 +63,17 @@ public class PatientList {
     }
 
 
+    public Patient findByIDinOPDList(String patientID) {
+        System.out.println("Searching ID: "+patientID);
+        return OPDPatientList.stream()
+                .filter(patient -> patient.getId().equals(patientID))
+                .findFirst().orElse(null);
+    }
+
+    public Patient findByIDinIPDList(String patientID) {
+        System.out.println("Searching ID: "+patientID);
+        return IPDPatientList.stream()
+                .filter(patient -> patient.getId().equals(patientID))
+                .findFirst().orElse(null);
+    }
 }

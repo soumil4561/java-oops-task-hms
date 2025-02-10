@@ -3,16 +3,18 @@ package org.example.models.Patient;
 import org.example.models.Staff.Doctor;
 
 public class Patient {
-    private final int id;
+    private final String id;
     private final String name;
     private final int age;
     private Doctor doctor;
     private String status = "OPD";
+    private static int patientCounter = 1;
 
     public Patient(String name, int age) {
-        this.id = 1;
+        this.id = "P"+patientCounter;
         this.name = name;
         this.age = age;
+        patientCounter++;
     }
 
     public void addPatient(){
@@ -69,7 +71,7 @@ public class Patient {
                 '}';
     }
 
-    public Object getId() {
+    public String getId() {
         return id;
     }
 }

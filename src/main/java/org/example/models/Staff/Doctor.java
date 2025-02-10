@@ -56,7 +56,7 @@ public class Doctor extends Staff implements DoctorActions {
         System.out.println("+----+------------+--------+");
 
         for (Patient p : assignedPatients) {
-            System.out.printf("| %-2d | %-10s | %-6s |\n", p.getId(), p.getName(), p.getStatus());
+            System.out.printf("| %-10s | %-10s | %-6s |\n", p.getId(), p.getName(), p.getStatus());
         }
 
         System.out.println("+----+------------+--------+");

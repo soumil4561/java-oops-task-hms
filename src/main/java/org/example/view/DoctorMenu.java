@@ -1,5 +1,6 @@
 package org.example.view;
 
+import org.example.models.Patient.PatientList;
 import org.example.models.Staff.Doctor;
 import org.example.models.Staff.DoctorList;
 import org.example.models.Patient.Patient;
@@ -44,14 +45,20 @@ public class DoctorMenu {
                     doctor.viewAssignedPatients();
                     break;
                 case 2:
-                    System.out.println("Enter patient name to admit:");
-                    String admitName = scanner.next();
-                    //ok will do it
+                    System.out.println("Enter patient ID to admit (Enter q to go back): ");
+                    String IPDPatientID = scanner.next();
+                    if(IPDPatientID.equals("q")) break;
+                    Patient patient = PatientList.getInstance().findByIDinOPDList(IPDPatientID);
+                    if(patient!=null) doctor.admitPatient(patient);
+                    else System.out.println("No Patient Found");
                     break;
                 case 3:
-                    System.out.println("Enter patient name to discharge:");
-                    String dischargeName = scanner.next();
-//                    doctor.dischargePatients(new Patient(dischargeName, 30, doctor));
+                    System.out.println("Enter patient ID to discharge (Enter q to go back):");
+                    String dischargePatientID = scanner.next();
+                    if(dischargePatientID.equals("q")) break;
+                    Patient patient1 = PatientList.getInstance().findByIDinIPDList(dischargePatientID);
+                    if(patient1!=null) doctor.dischargePatients(patient1);
+                    else System.out.println("No Patient found");
                     break;
                 case 4:
                     run = false;
