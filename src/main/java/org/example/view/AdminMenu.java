@@ -48,14 +48,12 @@ public class AdminMenu {
                         String newName = scanner.nextLine().trim();
                         if (newName.equalsIgnoreCase("q")) break;
                         admin.setHospitalName(newName);
-                        System.out.println("Hospital name updated successfully.");
                         break;
                     case 2:
                         System.out.print("Enter new hospital address (Enter 'q' to quit): ");
                         String newAddress = scanner.nextLine().trim();
                         if (newAddress.equalsIgnoreCase("q")) break;
                         admin.setHospitalAddress(newAddress);
-                        System.out.println("Hospital address updated successfully.");
                         break;
                     case 3:
                         System.out.print("Enter doctor name (Enter 'q' to quit): ");
@@ -65,14 +63,12 @@ public class AdminMenu {
                         String doctorSpecialty = scanner.nextLine().trim();
                         if (doctorSpecialty.equalsIgnoreCase("q")) break;
                         admin.addDoctor(doctorName, doctorSpecialty);
-                        System.out.println("Doctor added successfully.");
                         break;
                     case 4:
                         System.out.print("Enter receptionist name (Enter 'q' to quit): ");
                         String receptionistName = scanner.nextLine().trim();
                         if (receptionistName.equalsIgnoreCase("q")) break;
                         admin.addReceptionist(receptionistName);
-                        System.out.println("Receptionist added successfully.");
                         break;
                     case 5:
                         running = false;

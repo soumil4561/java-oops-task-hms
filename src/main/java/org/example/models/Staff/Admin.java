@@ -53,7 +53,6 @@ public class Admin extends Staff implements AdminActions {
 
             Doctor doctor = new Doctor(name, speciality);
             doctorList.addDoctor(doctor);
-            System.out.println("Doctor " + name + " added successfully.");
         } catch (IllegalArgumentException e) {
             System.err.println("Invalid input: " + e.getMessage());
         } catch (IllegalStateException e) {
@@ -69,7 +68,6 @@ public class Admin extends Staff implements AdminActions {
             ReceptionistList receptionistList = ReceptionistList.getInstance();
             Receptionist receptionist = new Receptionist(name);
             receptionistList.addReceptionist(receptionist);
-            System.out.println("Receptionist " + name + " added successfully.");
         } catch (IllegalArgumentException e) {
             System.err.println("Invalid input: " + e.getMessage());
         } catch (IllegalStateException e) {

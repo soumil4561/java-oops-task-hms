@@ -66,7 +66,7 @@ public class Doctor extends Staff implements DoctorActions {
             }
 
             patient.markAsInPatient();
-            System.out.println("Patient " + patient.getName() + " has been admitted.");
+            System.out.println("Patient " + patient.getName() + " has been admitted by "+this.getName());
 
         } catch (IllegalArgumentException | IllegalStateException e) {
             System.err.println("Error: " + e.getMessage());
@@ -88,7 +88,7 @@ public class Doctor extends Staff implements DoctorActions {
 
             assignedPatients.remove(patient);
             patient.dischargePatient();
-            System.out.println("Patient " + patient.getName() + " has been discharged.");
+            System.out.println("Patient " + patient.getName() + " has been discharged by "+this.getName());
 
         } catch (IllegalArgumentException | IllegalStateException e) {
             System.err.println("Error: " + e.getMessage());

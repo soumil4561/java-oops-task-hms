@@ -61,7 +61,7 @@ public class PatientList {
         }
         patient.setStatus("Discharged");
         DischargedList.add(patient);
-        System.out.println("Patient "+patient.getName()+ " discharged!");
+        System.out.println("Patient "+patient.getName()+ " transferred to Discharged List!");
     }
 
     public List<Patient> getOPDPatientList() {
@@ -87,7 +87,7 @@ public class PatientList {
 
             return findByIDinDischargedList(patientID);
         } catch (Exception e) {
-            System.out.println("Unexpected error occured: "+e.getMessage());
+            System.out.println("Unexpected error occurred: "+e.getMessage());
             return null;
         }
     }

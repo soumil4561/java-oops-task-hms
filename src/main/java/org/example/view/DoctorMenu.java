@@ -46,7 +46,6 @@ public class DoctorMenu {
                             Patient patient = PatientList.getInstance().findById(IPDPatientID);
                             if (patient != null) {
                                 doctor.admitPatient(patient);
-                                System.out.println("Patient " + patient.getName() + " admitted successfully.");
                             } else {
                                 System.out.println("Error: No Patient Found with ID: " + IPDPatientID);
                             }
@@ -59,7 +58,6 @@ public class DoctorMenu {
                             Patient patientToDischarge = PatientList.getInstance().findById(dischargePatientID);
                             if (patientToDischarge != null) {
                                 doctor.dischargePatients(patientToDischarge);
-                                System.out.println("Patient " + patientToDischarge.getName() + " discharged successfully.");
                             } else {
                                 System.out.println("Error: No Patient Found with ID: " + dischargePatientID);
                             }

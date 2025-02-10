@@ -60,7 +60,7 @@ public class SampleDataLoader {
                         Patient patient = new Patient(name, age);
                         patient.setDoctor(assignedDoctor);
                         patient.setStatus("OPD");
-                        assignedDoctor.addPatienttoList(patient);
+                        assignedDoctor.addPatientToList(patient);
                         PatientList.getInstance().addOPDPatient(patient);
                         if(status.equals("IPD")) assignedDoctor.admitPatient(patient);
                         if(status.equals("Discharged")) assignedDoctor.dischargePatients(patient);

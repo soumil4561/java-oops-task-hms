@@ -67,7 +67,7 @@ public class DoctorList {
             return doctors.stream()
                     .filter(doctor -> doctor.getId().equalsIgnoreCase(id))
                     .findFirst()
-                    .orElseThrow(() -> new NoSuchElementException("No doctor found with ID: " + id));
+                    .orElse(null);
 
         } catch (IllegalArgumentException | NoSuchElementException e) {
             System.err.println("Error: " + e.getMessage());
@@ -89,15 +89,10 @@ public class DoctorList {
             System.out.println("No doctors available.");
             return;
         }
-
-        System.out.println("+----+------------+---------------+");
         System.out.println("| ID | Name       | Speciality    |");
-        System.out.println("+----+------------+---------------+");
 
         for (Doctor doctor : doctors) {
             System.out.printf("| %-4s | %-10s | %-13s |\n", doctor.getId(), doctor.getName(), doctor.getSpeciality());
         }
-
-        System.out.println("+----+------------+---------------+");
     }
 }

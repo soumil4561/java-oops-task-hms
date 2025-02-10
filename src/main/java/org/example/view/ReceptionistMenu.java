@@ -38,7 +38,6 @@ public class ReceptionistMenu {
                 switch (action) {
                     case 1:
                         System.out.print("Enter patient name to register (Enter 'q' to go back): ");
-                        scanner.nextLine(); // Consume leftover newline
                         String patientName = scanner.nextLine().trim();
 
                         if (patientName.equalsIgnoreCase("q")) break;
@@ -56,7 +55,7 @@ public class ReceptionistMenu {
                             }
                         } catch (InputMismatchException e) {
                             System.out.println("Error: Invalid input. Please enter a valid age.");
-                            scanner.nextLine(); // Clear invalid input
+                            scanner.nextLine();
                             break;
                         }
 
@@ -85,8 +84,6 @@ public class ReceptionistMenu {
                         Patient newPatient = new Patient(patientName, patientAge);
                         receptionist.registerPatient(newPatient);
                         receptionist.assignPatientToDoctor(newPatient, selectedDoctor);
-
-                        System.out.println("Patient " + patientName + " successfully assigned to Dr. " + selectedDoctor.getName());
                         break;
                     case 2:
                         run = false;
