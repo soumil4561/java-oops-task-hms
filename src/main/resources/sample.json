@@ -1,0 +1,40 @@
+{
+  "receptionists": [
+    {
+      "name": "Alice"
+    },
+    {
+      "name": "Bob"
+    }
+  ],
+  "doctors": [
+    {
+      "name": "Dr. Smith",
+      "speciality": "Cardiology"
+    },
+    {
+      "name": "Dr. Johnson",
+      "speciality": "Neurology"
+    }
+  ],
+  "patients": [
+    {
+      "name": "John Doe",
+      "age": 45,
+      "doctor": "Dr. Smith",
+      "status": "OPD"
+    },
+    {
+      "name": "Jane Doe",
+      "age": 30,
+      "doctor": "Dr. Johnson",
+      "status": "IPD"
+    },
+    {
+      "name": "Alice Brown",
+      "age": 50,
+      "doctor": "Dr. Smith",
+      "status": "Discharged"
+    }
+  ]
+}
