@@ -23,6 +23,20 @@ A java-based application designed to manage hospital operations efficiently. It 
 ## Git Logs
 ![Git Logs](git_logs.png "Git Logs")
 
+## OOPs Concepts
+### Abstraction
+- Defined interfaces for different roles (Admin, Doctor, Receptionist) to enforce role-specific actions.
+
+### Encapsulation
+- By using private fields and getter-setters, access to critical fields was controlled
+- Using private constructors in the singleton classes to limit multi-instance creation
+
+### Inheritence
+- Created Staff abstract class inherited by all staff roles in the hosptial, namely Admin, Receptionist and Doctor
+
+### Polymorphism
+- Implemented method overriding to allow specific behaviors for different staff roles.
+
 ## Documentation
 
 Documentation is done in code via the JavaDoc principles.
