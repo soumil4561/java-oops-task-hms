@@ -4,8 +4,15 @@ import org.example.interfaces.AdminActions;
 import org.example.models.Hospital.Hospital;
 import org.example.utils.ValidateUserInput;
 
+/**
+ * Admin Class for defining properties of the admin.
+ * The admin will be a singleton class in the application.
+ * It extends the Staff properties and are required to implement certain defined tasks defined in the AdminActions interface.
+ */
 public class Admin extends Staff implements AdminActions {
+    // The static Admin object private for limited access ie to the admin itself.
     private static Admin instance;
+    // the hospital object
     private final Hospital hospital;
 
     private Admin(Hospital hospital) {
@@ -13,6 +20,12 @@ public class Admin extends Staff implements AdminActions {
         this.hospital = hospital;
     }
 
+    /**
+     * Returns the Admin object instance defined in the class.
+     * if found null, new instance is created for the app
+     * @param hospital
+     * @return Admin object instance
+     */
     public static Admin getInstance(Hospital hospital) {
         if (instance == null) {
             instance = new Admin(hospital);
@@ -20,6 +33,11 @@ public class Admin extends Staff implements AdminActions {
         return instance;
     }
 
+    /**
+     * set the hospital name. The entered string is validated for null safety
+     * @param name: name of the hospital
+     * @throws IllegalArgumentException when hospital name is invalid
+     */
     public void setHospitalName(String name) {
         try {
             ValidateUserInput.validateStringInput(name);
@@ -32,6 +50,11 @@ public class Admin extends Staff implements AdminActions {
         }
     }
 
+    /**
+     * set the hospital address/ The entered string is validated for null safety
+     * @param address: address of the hospital
+     * @throws IllegalArgumentException when the address is invalid
+     */
     public void setHospitalAddress(String address) {
         try {
             ValidateUserInput.validateStringInput(address);
@@ -44,6 +67,13 @@ public class Admin extends Staff implements AdminActions {
         }
     }
 
+    /**
+     * Creates new doctor object for the hospital. Both parameters are validated
+     * @param name: name of the doctor
+     * @param speciality: speciality of said doctor
+     * @throws IllegalArgumentException
+     * @throws IllegalStateException
+     */
     public void addDoctor(String name, String speciality) {
         try {
             ValidateUserInput.validateStringInput(name);
@@ -62,6 +92,12 @@ public class Admin extends Staff implements AdminActions {
         }
     }
 
+    /**
+     * Creates new receptionist object for the hospital. name parameter is validated
+     * @param name: name of the receptionist
+     * @throws IllegalArgumentException
+     * @throws IllegalStateException
+     */
     public void addReceptionist(String name) {
         try {
             ValidateUserInput.validateStringInput(name);

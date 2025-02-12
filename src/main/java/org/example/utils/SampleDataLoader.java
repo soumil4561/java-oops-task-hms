@@ -14,7 +14,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * Sample data loader to initially populate the application at the start
+ * The data is referred from json file placed in the resource folder name 'sample.json'
+ * The data is read using the gson library
+ */
 public class SampleDataLoader {
+    /**
+     * Static data loader for the application
+     */
     public static void loadSampleData() {
         // Check if sample data should be loaded
         if(!ConfigLoader.loadSampleData()) return;
@@ -26,7 +34,7 @@ public class SampleDataLoader {
             }
 
             JsonObject root = JsonParser.parseReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8)).getAsJsonObject();
-
+            //loading all doctors as an array
             JsonArray doctorsArray = root.getAsJsonArray("doctors");
             if (doctorsArray != null) {
                 for (var element : doctorsArray) {
@@ -36,7 +44,7 @@ public class SampleDataLoader {
                     DoctorList.getInstance().addDoctor(new Doctor(name, speciality));
                 }
             }
-
+            //loading all receptionists as an array
             JsonArray receptionistsArray = root.getAsJsonArray("receptionists");
             if (receptionistsArray != null) {
                 for (var element : receptionistsArray) {
@@ -46,6 +54,7 @@ public class SampleDataLoader {
                 }
             }
 
+            //loading all patients as an array
             JsonArray patientsArray = root.getAsJsonArray("patients");
             if (patientsArray != null) {
                 for (var element : patientsArray) {
@@ -54,7 +63,7 @@ public class SampleDataLoader {
                     int age = patientObj.get("age").getAsInt();
                     String status = patientObj.get("status").getAsString();
                     String doctorName = patientObj.get("doctor").getAsString();
-
+                    //finding the doctors mentioned in the json in the doctor list by name
                     Doctor assignedDoctor = DoctorList.getInstance().findByName(doctorName);
                     if (assignedDoctor != null) {
                         Patient patient = new Patient(name, age);

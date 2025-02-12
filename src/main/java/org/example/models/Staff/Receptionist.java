@@ -4,14 +4,31 @@ import org.example.interfaces.ReceptionistActions;
 import org.example.models.Patient.Patient;
 import org.example.models.Patient.PatientList;
 
+/**
+ * Receptionist class for defining properties and actions of a receptionist.
+ * A receptionist is responsible for registering patients and assigning them to doctors.
+ * It extends the Staff class and implements the ReceptionistActions interface.
+ */
 public class Receptionist extends Staff implements ReceptionistActions {
+    // Counter to generate unique IDs for each receptionist
     public static int receptionistCounter = 1;
 
+    /**
+     * Constructor to initialize a receptionist with a unique ID and name.
+     *
+     * @param name Name of the receptionist.
+     */
     public Receptionist(String name) {
         super("R" + receptionistCounter, name, "Receptionist");
         receptionistCounter++;
     }
 
+    /**
+     * Registers a patient in the hospital system.
+     *
+     * @param patient The patient to be registered.
+     * @throws IllegalArgumentException if the patient object is null.
+     */
     @Override
     public void registerPatient(Patient patient) {
         try {
@@ -27,6 +44,13 @@ public class Receptionist extends Staff implements ReceptionistActions {
         }
     }
 
+    /**
+     * Assigns a patient to a doctor.
+     *
+     * @param patient The patient to be assigned.
+     * @param doctor  The doctor to whom the patient will be assigned.
+     * @throws IllegalArgumentException if either the patient or doctor is null.
+     */
     @Override
     public void assignPatientToDoctor(Patient patient, Doctor doctor) {
         try {
@@ -48,6 +72,10 @@ public class Receptionist extends Staff implements ReceptionistActions {
         }
     }
 
+    /**
+     * Defines the general duty performed by a receptionist.
+     * This method prints a message indicating that the receptionist is scheduling appointments.
+     */
     @Override
     public void performDuties() {
         System.out.println(getName() + " is scheduling appointments.");
