@@ -8,7 +8,15 @@ import org.example.utils.ValidateUserInput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Class for the admin menu display in the cli
+ */
 public class AdminMenu {
+    /**
+     * Shows the main menu before accessing the options.
+     * Ask for the admin password before access can be granted
+     * @param hospital Hospital instance handled by the admin
+     */
     public static void showMenu(Hospital hospital) {
         Scanner scanner = new Scanner(System.in);
 
@@ -28,6 +36,12 @@ public class AdminMenu {
         }
     }
 
+    /**
+     * Display the admin functions on screen once the access is granted.
+     * Takes in user input accordingly
+     * @param admin: The admin object which will implement the method
+     * @param scanner Scanner object for taking user input
+     */
     private static void displayAdminOptions(Admin admin, Scanner scanner) {
         boolean running = true;
 
@@ -43,19 +57,19 @@ public class AdminMenu {
                 int choice = ValidateUserInput.getValidInteger(scanner, "Your Choice: ");
 
                 switch (choice) {
-                    case 1:
+                    case 1: // Change hospital name
                         System.out.print("Enter new hospital name (Enter 'q' to quit): ");
                         String newName = scanner.nextLine().trim();
                         if (newName.equalsIgnoreCase("q")) break;
                         admin.setHospitalName(newName);
                         break;
-                    case 2:
+                    case 2: //Change Hospital Address
                         System.out.print("Enter new hospital address (Enter 'q' to quit): ");
                         String newAddress = scanner.nextLine().trim();
                         if (newAddress.equalsIgnoreCase("q")) break;
                         admin.setHospitalAddress(newAddress);
                         break;
-                    case 3:
+                    case 3: //Register a new Doctor
                         System.out.print("Enter doctor name (Enter 'q' to quit): ");
                         String doctorName = scanner.nextLine().trim();
                         if (doctorName.equalsIgnoreCase("q")) break;
@@ -64,13 +78,13 @@ public class AdminMenu {
                         if (doctorSpecialty.equalsIgnoreCase("q")) break;
                         admin.addDoctor(doctorName, doctorSpecialty);
                         break;
-                    case 4:
+                    case 4: //Register a new Receptionist
                         System.out.print("Enter receptionist name (Enter 'q' to quit): ");
                         String receptionistName = scanner.nextLine().trim();
                         if (receptionistName.equalsIgnoreCase("q")) break;
                         admin.addReceptionist(receptionistName);
                         break;
-                    case 5:
+                    case 5: //Exit the menu
                         running = false;
                         System.out.println("Exiting Admin Menu...");
                         break;

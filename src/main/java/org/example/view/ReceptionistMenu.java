@@ -11,7 +11,14 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class to show Receptionist menu in the cli
+ */
 public class ReceptionistMenu {
+    /**
+     * Display the receptionist functions in the terminal
+     * Asks for receptionist id before any functions can be accessed
+     */
     public static void showMenu() {
         Scanner scanner = new Scanner(System.in);
 

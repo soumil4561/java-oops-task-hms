@@ -1,39 +1,39 @@
 {
   "receptionists": [
     {
-      "name": "Alice"
+      "name": "Cortana"
     },
     {
-      "name": "Bob"
+      "name": "Siri"
     }
   ],
   "doctors": [
     {
-      "name": "Dr. Smith",
+      "name": "Arthur Dent",
       "speciality": "Cardiology"
     },
     {
-      "name": "Dr. Johnson",
-      "speciality": "Neurology"
+      "name": "Shaun Murphy",
+      "speciality": "Surgeon"
     }
   ],
   "patients": [
     {
-      "name": "John Doe",
-      "age": 45,
-      "doctor": "Dr. Smith",
+      "name": "Soumil Singh",
+      "age": 23,
+      "doctor": "Shaun Murphy",
       "status": "OPD"
     },
     {
-      "name": "Jane Doe",
+      "name": "Anurup Mondal",
       "age": 30,
-      "doctor": "Dr. Johnson",
+      "doctor": "Jane Shephard",
       "status": "IPD"
     },
     {
-      "name": "Alice Brown",
+      "name": "Dev Parmar",
       "age": 50,
-      "doctor": "Dr. Smith",
+      "doctor": "Shaun Murphy",
       "status": "Discharged"
     }
   ]

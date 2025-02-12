@@ -9,7 +9,14 @@ import org.example.utils.ValidateUserInput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Class for showing the doctor menu in the cli
+ */
 public class DoctorMenu {
+    /**
+     * Shows the main menu before access to functions
+     * Asks for doctor id before granting access
+     */
     public static void showMenu() {
         Scanner scanner = new Scanner(System.in);
 
@@ -35,10 +42,10 @@ public class DoctorMenu {
                     int action = ValidateUserInput.getValidInteger(scanner, "Your Choice: ");
 
                     switch (action) {
-                        case 1:
+                        case 1: //view the patients assigned to the doctor
                             doctor.viewAssignedPatients();
                             break;
-                        case 2:
+                        case 2: // Admit a patient from the OPD status
                             System.out.print("Enter patient ID to admit (Enter 'q' to go back): ");
                             String IPDPatientID = scanner.nextLine().trim();
                             if (IPDPatientID.equalsIgnoreCase("q")) break;
@@ -50,7 +57,7 @@ public class DoctorMenu {
                                 System.out.println("Error: No Patient Found with ID: " + IPDPatientID);
                             }
                             break;
-                        case 3:
+                        case 3: //Discharge a patient
                             System.out.print("Enter patient ID to discharge (Enter 'q' to go back): ");
                             String dischargePatientID = scanner.nextLine().trim();
                             if (dischargePatientID.equalsIgnoreCase("q")) break;
@@ -62,7 +69,7 @@ public class DoctorMenu {
                                 System.out.println("Error: No Patient Found with ID: " + dischargePatientID);
                             }
                             break;
-                        case 4:
+                        case 4: // Exit menu
                             run = false;
                             System.out.println("Exiting Doctor Menu...");
                             break;

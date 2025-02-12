@@ -8,6 +8,9 @@ import org.example.utils.ValidateUserInput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Class for showing the main menu in the cli
+ */
 public class MainMenu {
     private final Hospital hospital;
 
@@ -18,6 +21,9 @@ public class MainMenu {
         this.hospital = hospital;
     }
 
+    /**
+     * Display the main menu
+     */
     public void display() {
         Scanner scanner = new Scanner(System.in);
         boolean run = true;
@@ -38,22 +44,22 @@ public class MainMenu {
                 int choice = ValidateUserInput.getValidInteger(scanner, "Your Choice: ");
 
                 switch (choice) {
-                    case 1:
+                    case 1: //show receptionist menu
                         ReceptionistMenu.showMenu();
                         break;
-                    case 2:
+                    case 2: //show doctor menu
                         DoctorMenu.showMenu();
                         break;
-                    case 3:
+                    case 3: //show admin menu
                         AdminMenu.showMenu(hospital);
                         break;
-                    case 4:
+                    case 4: //print the staff list
                         System.out.println("\n---- Receptionists ----");
                         ReceptionistList.getInstance().viewStaffList();
                         System.out.println("\n---- Doctors ----");
                         DoctorList.getInstance().viewStaffList();
                         break;
-                    case 5:
+                    case 5: //exit
                         System.out.print("Are you sure you want to quit? (yes/no): ");
                         String confirmation = scanner.next().trim().toLowerCase();
 
