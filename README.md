@@ -20,6 +20,8 @@ A java-based application designed to manage hospital operations efficiently. It 
 - Register new patients.
 - Assign patients to doctors.
 
+## Git Logs
+![Git Logs](git_logs.png "Git Logs")
 
 ## Documentation
 
